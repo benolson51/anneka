@@ -52,29 +52,46 @@ Palette and fonts live at the top of `css/styles.css`:
 - `--accent` (camel), `--ivory`, `--cream`, `--sand`, `--sage` — change to retheme
 - Fonts: Cormorant Garamond (headings), Jost (labels/nav), Inter (body)
 
-## Deploy + connect the Wix domain (annekasweeneylaw.com)
-This is hand-coded HTML, so it does **not** go inside the Wix editor — Wix only hosts
-sites built in Wix. Instead, host the real site on a free static host and point the
-Wix-registered domain at it.
+## Hosting — GitHub Pages (already set up)
+This repo (https://github.com/benolson51/anneka) **auto-deploys to GitHub Pages** on
+every push to `main`, via `.github/workflows/pages.yml`. The custom domain is set in
+the `CNAME` file (`annekasweeneylaw.com`). No build step — files are served as-is
+(`.nojekyll`).
 
-**1. Put it live (fastest — instant sample link):**
-- Go to https://app.netlify.com/drop and drag this whole folder onto the page.
-- Netlify gives you a live URL like `https://abc123.netlify.app` — share that with Anneka.
-- Create a free Netlify account to keep the site and rename the subdomain.
+### Final step: point the Wix domain at GitHub Pages
+The domain currently points to Wix (a parking page). To make it serve this site, edit
+the DNS in your Wix account:
 
-**2. Point annekasweeneylaw.com at it — once Anneka approves:**
-- In Netlify: Site → Domain management → Add `annekasweeneylaw.com`. Netlify shows you
-  the exact DNS records to create.
-- In Wix: Domains → annekasweeneylaw.com → Manage / Advanced DNS records:
-  - **A record** for `@` → Netlify's IP (currently `75.2.60.5` — use whatever Netlify shows).
-  - **CNAME** for `www` → `your-site.netlify.app`.
-- Netlify auto-provisions HTTPS. DNS changes take a few minutes to a few hours.
-- Alternative: point Wix's **nameservers** to Netlify's (shown in Netlify → Domains).
+1. **Wix → Domains → annekasweeneylaw.com → Manage DNS records** (Advanced / Edit DNS).
+2. Under **A records** for host `@` (the root): remove the existing Wix A records and add
+   GitHub Pages' four IPs:
+   ```
+   185.199.108.153
+   185.199.109.153
+   185.199.110.153
+   185.199.111.153
+   ```
+3. **CNAME** record for host `www` → `benolson51.github.io`
+4. *(Optional, IPv6)* AAAA records for `@`:
+   ```
+   2606:50c0:8000::153
+   2606:50c0:8001::153
+   2606:50c0:8002::153
+   2606:50c0:8003::153
+   ```
+5. Save. DNS propagates in ~10 minutes to a few hours. The site then serves at
+   **https://annekasweeneylaw.com** with free, automatic HTTPS.
+
+> If Wix won't let you edit the root `@` A records, it's because the domain is still
+> "connected" to a Wix site — disconnect it from any Wix site first, then use the DNS
+> records editor.
+
+Until DNS is changed the site isn't publicly viewable (the `benolson51.github.io/anneka`
+URL just 301-redirects to the custom domain). To get a temporary preview link before
+touching DNS, remove the `CNAME` file and the custom domain from Pages settings.
 
 **Before launch:** delete `robots.txt` (it blocks search engines while the site is a
 draft) so Google can index the real site.
-
-Other hosts (Cloudflare Pages, GitHub Pages) work the same way if you prefer.
 
 ## Legal note
 Every page footer carries a disclaimer (no legal advice / no attorney-client
