@@ -1,0 +1,44 @@
+// Mobile nav toggle
+const toggle = document.querySelector(".nav__toggle");
+const links = document.querySelector(".nav__links");
+if (toggle && links) {
+  toggle.addEventListener("click", () => {
+    const open = links.classList.toggle("open");
+    toggle.setAttribute("aria-expanded", String(open));
+  });
+}
+
+// Current year in footer
+const yearEl = document.getElementById("year");
+if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+// Until Formspree is connected, the contact form would 404 on submit.
+// Show a friendly preview message instead. (Auto-disables once a real
+// form ID replaces YOUR_FORM_ID.)
+const demoForm = document.querySelector('form[action*="YOUR_FORM_ID"]');
+if (demoForm) {
+  demoForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    demoForm.innerHTML =
+      '<p class="form-note" style="color:var(--accent);font-size:1.05rem;">' +
+      "This is a preview of the site — the contact form will be connected before launch. " +
+      'For now, you can reach Anneka at <a href="tel:+15596181069">(559) 618-1069</a>.</p>';
+  });
+}
+
+// Scroll-reveal animations (respects prefers-reduced-motion via CSS)
+const revealEls = document.querySelectorAll(".reveal");
+if ("IntersectionObserver" in window && revealEls.length) {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("in");
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+  revealEls.forEach((el) => io.observe(el));
+} else {
+  // Fallback: show everything if IntersectionObserver isn't available
+  revealEls.forEach((el) => el.classList.add("in"));
+}

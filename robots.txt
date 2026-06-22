@@ -1,0 +1,5 @@
+# TEMPORARY — this is a draft/sample with placeholder content.
+# Before the real launch, DELETE this file (or change Disallow to Allow)
+# so Google can index annekasweeneylaw.com.
+User-agent: *
+Disallow: /

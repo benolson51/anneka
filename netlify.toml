@@ -1,0 +1,4 @@
+# Netlify config — static site, no build step.
+# Works for drag-and-drop deploys and for Git-connected deploys.
+[build]
+  publish = "."
