@@ -22,7 +22,7 @@ if (demoForm) {
     demoForm.innerHTML =
       '<p class="form-note" style="color:var(--accent);font-size:1.05rem;">' +
       "This is a preview of the site — the contact form will be connected before launch. " +
-      'For now, you can reach Anneka at <a href="tel:+15596181069">(559) 618-1069</a>.</p>';
+      'For now, you can reach Anneka at <a href="tel:+15597529529">(559) 752-9529</a>.</p>';
   });
 }
 
