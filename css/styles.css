@@ -120,7 +120,7 @@ p { margin: 0 0 1.1em; }
   display: flex; align-items: center; justify-content: center;
   font-family: var(--serif); font-size: 0.95rem; letter-spacing: 0.02em; color: var(--accent);
 }
-.brand__text { display: flex; flex-direction: column; line-height: 1.1; }
+.brand__text { display: flex; flex-direction: column; line-height: 1.15; gap: 5px; }
 .brand__name { font-family: var(--serif); font-size: 1.3rem; color: var(--heading); font-weight: 600; }
 .brand__tag { font-family: var(--label); font-size: 0.6rem; letter-spacing: 0.26em; text-transform: uppercase; color: var(--muted); }
 
