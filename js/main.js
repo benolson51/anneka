@@ -12,20 +12,6 @@ if (toggle && links) {
 const yearEl = document.getElementById("year");
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-// Until Formspree is connected, the contact form would 404 on submit.
-// Show a friendly preview message instead. (Auto-disables once a real
-// form ID replaces YOUR_FORM_ID.)
-const demoForm = document.querySelector('form[action*="YOUR_FORM_ID"]');
-if (demoForm) {
-  demoForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    demoForm.innerHTML =
-      '<p class="form-note" style="color:var(--accent);font-size:1.05rem;">' +
-      "This is a preview of the site — the contact form will be connected before launch. " +
-      'For now, you can reach Anneka at <a href="tel:+15597529529">(559) 752-9529</a>.</p>';
-  });
-}
-
 // Scroll-reveal animations (respects prefers-reduced-motion via CSS)
 const revealEls = document.querySelectorAll(".reveal");
 if ("IntersectionObserver" in window && revealEls.length) {

@@ -50,11 +50,16 @@
       <div class="reveal">
         <h2>Send a message</h2>
         <!--
-          TODO: Connect this form.
-          Easiest option for a static site: create a free form at https://formspree.io,
-          then replace YOUR_FORM_ID below with the ID they give you.
+          Form delivery: FormSubmit (no account needed).
+          Submissions email anneka@agsweeneylaw.com. First-ever submission triggers
+          a one-time activation email to that inbox — click "Activate" once.
         -->
-        <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <form action="https://formsubmit.co/anneka@agsweeneylaw.com" method="POST">
+          <input type="hidden" name="_subject" value="New consultation request — agsweeneylaw.com" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_next" value="https://agsweeneylaw.com/thanks.html" />
+          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true" />
           <div class="field">
             <label for="name">Full name</label>
             <input type="text" id="name" name="name" required />
