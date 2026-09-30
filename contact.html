@@ -50,16 +50,16 @@
       <div class="reveal">
         <h2>Send a message</h2>
         <!--
-          Delivery: js/main.js posts to data-endpoint in the background. If the
-          service fails, visitors get a prefilled-email fallback instead of an
-          error page. `action` is only used when JavaScript is off.
+          Delivery: Web3Forms (the access key is public by design). js/main.js
+          posts to data-endpoint in the background; if that fails, visitors get
+          a prefilled-email fallback instead of an error page. `action` is only
+          used when JavaScript is off.
         -->
-        <form id="consult-form" action="https://formsubmit.co/anneka@agsweeneylaw.com" data-endpoint="https://formsubmit.co/ajax/anneka@agsweeneylaw.com" method="POST">
-          <input type="hidden" name="_subject" value="New consultation request — agsweeneylaw.com" />
-          <input type="hidden" name="_template" value="table" />
-          <input type="hidden" name="_captcha" value="false" />
-          <input type="hidden" name="_next" value="https://agsweeneylaw.com/thanks.html" />
-          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <form id="consult-form" action="https://api.web3forms.com/submit" data-endpoint="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="021fd60e-327e-49f5-9a0a-6a7f48a6e48b" />
+          <input type="hidden" name="subject" value="New consultation request — agsweeneylaw.com" />
+          <input type="hidden" name="from_name" value="agsweeneylaw.com" />
+          <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true" />
           <div class="field">
             <label for="name">Full name</label>
             <input type="text" id="name" name="name" required />

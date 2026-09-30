@@ -34,7 +34,7 @@ if (consultForm && "fetch" in window) {
         body: new URLSearchParams(data),
       });
       const json = await res.json().catch(() => ({}));
-      // FormSubmit answers 200 with success:"false" when a message wasn't delivered.
+      // A 200 can still mean "not delivered" (success: false), so check both.
       if (!res.ok || String(json.success) !== "true") throw new Error("not delivered");
       window.location.href = "thanks.html";
     } catch {
