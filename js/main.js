@@ -12,6 +12,51 @@ if (toggle && links) {
 const yearEl = document.getElementById("year");
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+// Contact form: send in the background so an outage at the delivery service
+// never strands a visitor on an error page — offer a prefilled email instead.
+const consultForm = document.getElementById("consult-form");
+if (consultForm && "fetch" in window) {
+  const button = consultForm.querySelector('button[type="submit"]');
+  const buttonLabel = button.textContent;
+  const statusEl = consultForm.querySelector(".form-status");
+
+  consultForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const data = new FormData(consultForm);
+    button.disabled = true;
+    button.textContent = "Sending…";
+    statusEl.hidden = true;
+
+    try {
+      const res = await fetch(consultForm.dataset.endpoint, {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: new URLSearchParams(data),
+      });
+      const json = await res.json().catch(() => ({}));
+      // FormSubmit answers 200 with success:"false" when a message wasn't delivered.
+      if (!res.ok || String(json.success) !== "true") throw new Error("not delivered");
+      window.location.href = "thanks.html";
+    } catch {
+      const body = [
+        `Name: ${data.get("name")}`,
+        `Email: ${data.get("email")}`,
+        `Phone: ${data.get("phone") || "—"}`,
+        `Topic: ${data.get("topic")}`,
+        "",
+        data.get("message") || "",
+      ].join("\n");
+      statusEl.querySelector(".form-status__email").href =
+        "mailto:anneka@agsweeneylaw.com" +
+        "?subject=" + encodeURIComponent(`Consultation request from ${data.get("name")}`) +
+        "&body=" + encodeURIComponent(body);
+      statusEl.hidden = false;
+      button.disabled = false;
+      button.textContent = buttonLabel;
+    }
+  });
+}
+
 // Scroll-reveal animations (respects prefers-reduced-motion via CSS)
 const revealEls = document.querySelectorAll(".reveal");
 if ("IntersectionObserver" in window && revealEls.length) {

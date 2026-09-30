@@ -50,11 +50,11 @@
       <div class="reveal">
         <h2>Send a message</h2>
         <!--
-          Form delivery: FormSubmit (no account needed).
-          Submissions email anneka@agsweeneylaw.com. First-ever submission triggers
-          a one-time activation email to that inbox — click "Activate" once.
+          Delivery: js/main.js posts to data-endpoint in the background. If the
+          service fails, visitors get a prefilled-email fallback instead of an
+          error page. `action` is only used when JavaScript is off.
         -->
-        <form action="https://formsubmit.co/anneka@agsweeneylaw.com" method="POST">
+        <form id="consult-form" action="https://formsubmit.co/anneka@agsweeneylaw.com" data-endpoint="https://formsubmit.co/ajax/anneka@agsweeneylaw.com" method="POST">
           <input type="hidden" name="_subject" value="New consultation request — agsweeneylaw.com" />
           <input type="hidden" name="_template" value="table" />
           <input type="hidden" name="_captcha" value="false" />
@@ -87,6 +87,11 @@
           </div>
           <p class="form-note">Please don't include confidential or sensitive details in this form — we'll cover those once we've connected.</p>
           <button type="submit" class="btn btn--primary">Request My Free Consultation</button>
+          <div class="form-status" role="alert" hidden>
+            <p><strong>Sorry — the online form is having trouble right now.</strong> Your message isn't lost:</p>
+            <a class="btn btn--primary form-status__email" href="mailto:anneka@agsweeneylaw.com">Send it by email instead</a>
+            <p class="form-note">Or call Anneka at <a href="tel:+15597529529">(559) 752-9529</a>.</p>
+          </div>
         </form>
       </div>
 
